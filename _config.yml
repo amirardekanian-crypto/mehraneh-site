@@ -1,0 +1,6 @@
+# Notes for whoever edits the site. Not part of the public website.
+exclude:
+  - README.md
+  - MAP.md
+  - CLAUDE.md
+  - .gitignore

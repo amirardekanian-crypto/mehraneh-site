@@ -29,7 +29,7 @@ Amir Ardekani's coaching site (`amirardekani.com`, repo `Website`). Start here, 
 | Stats strip (13 years, rank 1, …) | `<section class="stats">`. A stat with `data-only="tennis"` or `"padel"` shows for that sport only |
 | **Record cards** (rank 1, rank 3 Asia, Asian ATF, West Asia 2nd, World Tour runner-up, national team) | `#record`, one `.cred` div each. Six cards fill a 3 x 2 grid |
 | The padel-only "2 years of padel" paragraph | `#record`, `<p class="lead bridge">` inside `<div class="bridge-row" data-only="padel">` |
-| **Padel: her forehand, frame by frame** (slider, phase chips, «پخش آهسته») | `#lab`, beside the bridge paragraph. Frames, contact frame and phase names: `SPORTS.padel.lab`; the files are `media/padel-lab/fh-00.jpg` … `fh-16.jpg`. The ring's position on the ball is the `<circle>` in `#lab` (540 x 675 frame) |
+| **Padel: her backhand volley, frame by frame** (slider, phase chips, «پخش آهسته») | `#lab`, beside the bridge paragraph. Frames, contact frame and phase names: `SPORTS.padel.lab`; the files are `media/padel-lab/fh-00.jpg` … `fh-16.jpg`. The ring's position on the ball is the `<circle>` in `#lab` (540 x 675 frame) |
 | Photo strip («لحظه‌هایی از مسیرم») | `#photos`, one `<figure class="moment">` per photo (image, then caption). The first three are padel-only; a padel-only image uses `data-src`, not `src`, so the tennis page never downloads it |
 | About text | `#about` (shared paragraphs) and `aboutP1` in `SPORTS` (per sport) |
 | **Classes and prices** (toman) | `#classes`. Group class is tennis only: those cards have `data-only="tennis"` |
@@ -54,12 +54,12 @@ entry in `SPORTS`.
 | `serve.jpg` | A serve on clay | About shot 1, tennis |
 | `trophy.jpg` | Runner-up trophy handover, ITF World Tennis Tour Juniors | About shot 2, tennis |
 | `coach.jpg` | On court next to a coach | About shot 3, tennis |
-| `padel-hero.mp4`, `padel-hero-poster.jpg` | A 5.9 s loop of all three padel clips, cut on contact: each hit holds for 3 frames with a small push-in and a lime ring. Starts and loops on a forehand contact; the poster is that frame | Hero, padel |
-| `padel-about-forehand.jpg` | Forehand follow-through, smiling | About shot 1, padel |
+| `padel-hero.mp4`, `padel-hero-poster.jpg` | A 5.9 s loop of all three padel clips, cut on contact: each hit holds for 3 frames with a small push-in and a lime ring. Starts and loops on a backhand-volley contact; the poster is that frame | Hero, padel |
+| `padel-about-forehand.jpg` | Backhand-volley follow-through, smiling (file name says forehand; it isn't) | About shot 1, padel |
 | `padel-about-overhead.jpg` | Overhead, ball on the racquet | About shot 2, padel |
 | `padel-about-low.jpg` | A low ball, knees bent | About shot 3, padel |
-| `padel-strip-overhead.jpg`, `padel-strip-eyes.jpg`, `padel-strip-ready.jpg` | Overhead under the court's arched roof · racquet up, eyes on the ball · ready position | Photo strip, padel only (first three cards) |
-| `padel-lab/fh-00.jpg` … `fh-16.jpg` | One forehand, 17 frames from ready position to follow-through (`fh-10` is contact) | `#lab`, padel |
+| `padel-strip-overhead.jpg`, `padel-strip-contact.jpg`, `padel-strip-eyes-on-ball.jpg` | Overhead under the court's arched roof · ball on the racquet (photo from Amir; the venue's café sign and leaf logo cropped off) · from behind, eyes on the ball (photo from Amir; her hitting partner across the net cropped off) | Photo strip, padel only (first three cards) |
+| `padel-lab/fh-00.jpg` … `fh-16.jpg` | One backhand volley, 17 frames from ready position to follow-through (`fh-10` is contact) | `#lab`, padel |
 | `runnerup-tour.jpg` | Runner-up trophy, tour banner behind her | Photo strip |
 | `team-iran.jpg` | In the national-team kit | Photo strip |
 | `airport-team.jpg` | Welcome at the airport with the national team (portraits cropped off the top) | Photo strip |
@@ -69,12 +69,12 @@ entry in `SPORTS`.
 Every `padel-*` file comes from three iPhone clips Amir sent on 21 Oct 2026 (`IMG_4630`, `IMG_4631`, `IMG_4633`,
 1072 px wide, 30 fps): levelled (the phone was tilted about 2.5°), steadied, lightly graded, and cleaned. Things painted
 out of the background, so check any new crop from these clips for them:
-- `IMG_4631` (the close forehand): **a stranger's sign on the far wall with a name, phone number and QR code** (left of
+- `IMG_4631` (the close backhand volley): **a stranger's sign on the far wall with a name, phone number and QR code** (left of
   her), plus two shop logos behind the glass (right of her).
 - `IMG_4630` / `IMG_4633` (the overheads): the venue's café lettering and its leaf logo with a name. Amir chose not to
   name the venue on the footage. `IMG_4630` also shows a person in a doorway from about 3 s in; nothing after 2.9 s is used.
 
-The strokes are named only where certain: the close clip is a **forehand** (she is right-handed); the others are
+The strokes are named only where certain: the close clip is a **backhand volley** (Amir corrected this; it is not a forehand); the others are
 called «ضربه‌ی بالای سر» and «توپ پایین», not bandeja/smash/backhand. Phase names in `#lab` are neutral labels, not her
 coaching cues.
 

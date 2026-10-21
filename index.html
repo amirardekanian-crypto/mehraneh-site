@@ -551,7 +551,7 @@ section{position:relative}
 .vid-toggle svg{width:16px;height:16px;fill:currentColor;opacity:1}   /* not the placeholder's .shot svg 50% */
 .vid-toggle:hover,.vid-toggle:focus-visible{opacity:1;transform:scale(1.06)}
 
-/* ── padel: one forehand, frame by frame (in #record, beside the bridge paragraph) ── */
+/* ── padel: one backhand volley, frame by frame (in #record, beside the bridge paragraph) ── */
 .bridge-row{display:grid;gap:30px;margin-block-start:34px;align-items:center}
 .bridge-row[hidden]{display:none}
 .bridge-row .bridge{margin:0}
@@ -1177,10 +1177,10 @@ html.gated .nav,html.gated .rail,html.gated .tbar,html.gated .bar,html.gated .dr
     </div>
     <div class="bridge-row rv" data-only="padel" hidden>
       <p class="lead bridge">دو ساله که پدل هم بازی می‌کنم. چون ۱۳ سال تنیس پشتمه، چیزهایی که توی پدل دیر جا می‌افتن، مثل والی، اسمش، حرکت پا و خوندن توپ، برای من از قبل جا افتاده‌ن. و چون خودم از تنیس اومدم، می‌دونم کسی که از تنیس یا از صفر میاد سراغ پدل، دقیقاً کجا گیر می‌کنه.</p>
-      <!-- one forehand, frame by frame. Frames and phases: SPORTS.padel.lab -->
+      <!-- one backhand volley, frame by frame. Frames and phases: SPORTS.padel.lab -->
       <figure class="lab" id="lab">
         <div class="lab-stage">
-          <img data-src="media/padel-lab/fh-10.jpg" width="540" height="675" loading="lazy" decoding="async" alt="فورهند مهرانه توی زمین پدل، فریم به فریم">
+          <img data-src="media/padel-lab/fh-10.jpg" width="540" height="675" loading="lazy" decoding="async" alt="بک‌هند والی مهرانه توی زمین پدل، فریم به فریم">
           <svg class="lab-ring" viewBox="0 0 540 675" aria-hidden="true"><circle cx="264" cy="362" r="23"/></svg>
           <span class="lab-phase"></span>
         </div>
@@ -1188,9 +1188,9 @@ html.gated .nav,html.gated .rail,html.gated .tbar,html.gated .bar,html.gated .dr
           <span class="lab-clock"></span>
           <button class="btn btn-primary lab-play" type="button">پخش آهسته</button>
         </div>
-        <input class="lab-range" type="range" min="0" max="16" step="1" value="10" aria-label="جابه‌جایی بین فریم‌های فورهند">
+        <input class="lab-range" type="range" min="0" max="16" step="1" value="10" aria-label="جابه‌جایی بین فریم‌های بک‌هند والی">
         <div class="lab-phases"></div>
-        <figcaption class="lab-cap">فورهند من، فریم به فریم. نوار رو بکش.</figcaption>
+        <figcaption class="lab-cap">بک‌هند والی من، فریم به فریم. نوار رو بکش.</figcaption>
       </figure>
     </div>
   </div>
@@ -1210,12 +1210,12 @@ html.gated .nav,html.gated .rail,html.gated .tbar,html.gated .bar,html.gated .dr
         <figcaption>ضربه‌ی بالای سر</figcaption>
       </figure>
       <figure class="moment" data-only="padel" hidden>
-        <img data-src="media/padel-strip-eyes.jpg" width="585" height="780" loading="lazy" decoding="async" alt="مهرانه توی زمین پدل، راکت بالا و چشم روی توپ">
-        <figcaption>چشم روی توپ</figcaption>
+        <img data-src="media/padel-strip-contact.jpg" width="620" height="775" loading="lazy" decoding="async" alt="مهرانه توی زمین پدل، لحظه‌ی برخورد توپ با راکت">
+        <figcaption>لحظه‌ی برخورد</figcaption>
       </figure>
       <figure class="moment" data-only="padel" hidden>
-        <img data-src="media/padel-strip-ready.jpg" width="480" height="600" loading="lazy" decoding="async" alt="مهرانه در حالت آماده، اون طرف تور">
-        <figcaption>آماده‌ی توپ بعدی</figcaption>
+        <img data-src="media/padel-strip-eyes-on-ball.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="مهرانه از پشت، راکت بالا و چشم روی توپ">
+        <figcaption>چشم روی توپ</figcaption>
       </figure>
       <figure class="moment">
         <img src="media/runnerup-tour.jpg" width="939" height="960" loading="lazy" decoding="async" alt="نایب‌قهرمانی تور جهانی جوانان ITF، در کنار جام">
@@ -1833,11 +1833,11 @@ var SPORTS = {
     /* her own padel clips: the hero is a loop cut from all three, s0-s2 are stills from them */
     media:{
       hero:{video:"media/padel-hero.mp4", poster:"media/padel-hero-poster.jpg", w:680, h:850, alt:"مهرانه توی زمین پدل، چند ضربه پشت سر هم"},   /* poster: also in the <head> preload */
-      s0:{img:"media/padel-about-forehand.jpg", w:741, h:988, alt:"مهرانه بعد از یه فورهند، توی زمین پدل"},
+      s0:{img:"media/padel-about-forehand.jpg", w:741, h:988, alt:"مهرانه بعد از یه بک‌هند والی، توی زمین پدل"},
       s1:{img:"media/padel-about-overhead.jpg", w:540, h:540, alt:"ضربه‌ی بالای سر توی زمین پدل، توپ روی راکت"},
       s2:{img:"media/padel-about-low.jpg",      w:480, h:480, alt:"یه توپ پایین با زانوهای خم، جلوی دیوار شیشه‌ای"}
     },
-    /* the frame-by-frame forehand in #record: src = frame numbers in the 30 fps clip,
+    /* the frame-by-frame backhand volley in #record: src = frame numbers in the 30 fps clip,
        phases = [first frame, name, frame its chip jumps to] */
     lab:{
       dir:"media/padel-lab/fh-",
@@ -2011,7 +2011,7 @@ window.addEventListener("hashchange", route);
 applySport(SPORTS[(location.hash || "").replace("#", "")] ? (location.hash || "").replace("#", "") : "tennis");
 route();
 
-/* ─────────── padel: one forehand, frame by frame ───────────
+/* ─────────── padel: one backhand volley, frame by frame ───────────
    Driven only by the visitor (slider, phase chips, "play slowly"); nothing moves by itself.
    The frames load once the block is near the viewport, so the tennis page (block hidden) never fetches them. */
 (function(){

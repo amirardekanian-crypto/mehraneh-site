@@ -10,6 +10,9 @@ Mashhad). It is a separate project from Amir Ardekani's coaching site and shares
 - **Both sports, one layout:** a change to shared HTML shows on both. Use `data-only="tennis"` / `"padel"` for
   anything that differs, and `SPORTS` for strings and media.
 - **Two copies to keep in step:** `PHONE`/`WHATSAPP` and the venues list exist in both `index.html` and `form.html`.
+  The hero poster paths exist in `SPORTS.<sport>.media.hero` and in the preload script in `<head>`.
+- **Padel footage** (`media/padel-*`): its background had a stranger's name/phone/QR and venue signs painted out.
+  Any new crop from those clips must leave them out too (MAP.md, Media, says where they are).
 - **Keep `CNAME`.** Deleting it takes the custom domain off the site.
 - **`form.html` stays `noindex`; `index.html` is indexable.** Don't put a draft badge or `noindex` back on the home page.
 - **Photos:** new pictures go in `media/` with a new filename (never overwrite a published one: browsers cache them).

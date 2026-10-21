@@ -16,6 +16,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- a direct #tennis / #padel link: start the hero poster early (the gate needs nothing).
+     Second copy of SPORTS.<sport>.media.hero.poster: change both. -->
+
+
+<script>(function(){var p={tennis:"media/court-poster.jpg",padel:"media/padel-hero-poster.jpg"}[location.hash.slice(1)];if(p){var l=document.createElement("link");l.rel="preload";l.as="image";l.href=p;l.setAttribute("fetchpriority","high");document.head.appendChild(l);}})();</script>
 
 <style>
 /* ============ tokens ============ */
@@ -533,7 +538,47 @@ section{position:relative}
   object-fit:cover;border-radius:inherit;
 }
 .hero-shot.filled{box-shadow:0 30px 70px -30px rgba(0,0,0,.65)}
-.hero-shot.filled>video{object-position:center 42%}   /* keep the player, crop roof + empty foreground */
+.hero-shot.filled>video,.hero-shot.filled>img{object-position:center 42%}   /* keep the player, crop roof + empty foreground */
+/* a looping video sits on its own poster and fades in once it is really playing */
+.shot.filled>video{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+.shot.filled.live>video{opacity:1}
+.vid-toggle{
+  position:absolute;z-index:2;inset-block-end:12px;inset-inline-start:12px;
+  width:44px;height:44px;border:0;border-radius:50%;display:grid;place-content:center;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(6px);color:#fff;opacity:.8;cursor:pointer;
+  transition:opacity .2s,transform .2s;
+}
+.vid-toggle svg{width:16px;height:16px;fill:currentColor;opacity:1}   /* not the placeholder's .shot svg 50% */
+.vid-toggle:hover,.vid-toggle:focus-visible{opacity:1;transform:scale(1.06)}
+
+/* ── padel: one forehand, frame by frame (in #record, beside the bridge paragraph) ── */
+.bridge-row{display:grid;gap:30px;margin-block-start:34px;align-items:center}
+.bridge-row[hidden]{display:none}
+.bridge-row .bridge{margin:0}
+@media(min-width:860px){.bridge-row{grid-template-columns:1fr minmax(300px,370px);gap:60px}}
+.lab{margin:0 auto;width:100%;max-width:370px;display:grid;gap:12px}
+.lab-stage{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--ink-2);box-shadow:var(--shadow)}
+@supports not (aspect-ratio:1/1){.lab-stage{height:0;padding-top:125%}}   /* iOS 14: every child is absolute */
+.lab-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.lab-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
+.lab-ring.on{opacity:1}
+.lab-ring circle{fill:none;stroke:var(--ball);stroke-width:3.5;filter:drop-shadow(0 0 3px rgba(0,0,0,.45));
+  transform-box:fill-box;transform-origin:center}
+.lab-ring.on circle{animation:lab-pop .45s cubic-bezier(.2,.7,.3,1)}
+@keyframes lab-pop{from{transform:scale(.45);opacity:0}to{transform:none;opacity:1}}
+.lab-phase{position:absolute;inset-block-start:12px;inset-inline-start:12px;padding:2px 12px;border-radius:999px;
+  background:var(--ball);color:var(--on-ball);font-size:13px;font-weight:800;line-height:1.9}
+.lab-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lab-clock{font-family:var(--font-display);font-size:18px;color:var(--ink);line-height:1.5}
+.lab-play{padding:10px 18px;font-size:14.5px}
+.lab-range{width:100%;height:44px;margin:0;accent-color:var(--ink);cursor:pointer}
+.lab-phases{display:flex;flex-wrap:wrap;gap:6px}
+.lab-phases button{padding:6px 12px;border-radius:999px;border:1px solid rgb(var(--ink-rgb) / .22);background:transparent;
+  color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s,color .2s}
+.lab-phases button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.lab-cap{font-size:13.5px;color:var(--muted)}
+.lab :focus-visible{outline-color:var(--ink)}   /* a lime ring vanishes on this light band and on the lime button */
+@media (prefers-reduced-motion:reduce){.shot.filled>video,.vid-toggle,.lab-phases button{transition:none}.lab-ring.on circle{animation:none}}
 
 /* ══════════════════════ MOTION LAYER ══════════════════════ */
 
@@ -1130,11 +1175,28 @@ html.gated .nav,html.gated .rail,html.gated .tbar,html.gated .bar,html.gated .dr
         <div><b>بازیکن تیم ملی</b><span>رده‌های ۱۲، ۱۴ و ۱۶ سال و بزرگسال</span></div>
       </div>
     </div>
-    <p class="lead bridge rv" data-only="padel" hidden>دو ساله که پدل هم بازی می‌کنم. چون ۱۳ سال تنیس پشتمه، چیزهایی که توی پدل دیر جا می‌افتن، مثل والی، اسمش، حرکت پا و خوندن توپ، برای من از قبل جا افتاده‌ن. و چون خودم از تنیس اومدم، می‌دونم کسی که از تنیس یا از صفر میاد سراغ پدل، دقیقاً کجا گیر می‌کنه.</p>
+    <div class="bridge-row rv" data-only="padel" hidden>
+      <p class="lead bridge">دو ساله که پدل هم بازی می‌کنم. چون ۱۳ سال تنیس پشتمه، چیزهایی که توی پدل دیر جا می‌افتن، مثل والی، اسمش، حرکت پا و خوندن توپ، برای من از قبل جا افتاده‌ن. و چون خودم از تنیس اومدم، می‌دونم کسی که از تنیس یا از صفر میاد سراغ پدل، دقیقاً کجا گیر می‌کنه.</p>
+      <!-- one forehand, frame by frame. Frames and phases: SPORTS.padel.lab -->
+      <figure class="lab" id="lab">
+        <div class="lab-stage">
+          <img data-src="media/padel-lab/fh-10.jpg" width="540" height="675" loading="lazy" decoding="async" alt="فورهند مهرانه توی زمین پدل، فریم به فریم">
+          <svg class="lab-ring" viewBox="0 0 540 675" aria-hidden="true"><circle cx="264" cy="362" r="23"/></svg>
+          <span class="lab-phase"></span>
+        </div>
+        <div class="lab-row">
+          <span class="lab-clock"></span>
+          <button class="btn btn-primary lab-play" type="button">پخش آهسته</button>
+        </div>
+        <input class="lab-range" type="range" min="0" max="16" step="1" value="10" aria-label="جابه‌جایی بین فریم‌های فورهند">
+        <div class="lab-phases"></div>
+        <figcaption class="lab-cap">فورهند من، فریم به فریم. نوار رو بکش.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
-<!-- ============ ON THE COURT (her own photos; shared by both sports) ============ -->
+<!-- ============ ON THE COURT (her own photos; shared by both sports, the padel-only stills come first) ============ -->
 <section class="pad" id="photos">
   <div class="wrap">
     <div class="sec-head rv">
@@ -1143,6 +1205,18 @@ html.gated .nav,html.gated .rail,html.gated .tbar,html.gated .bar,html.gated .dr
     </div>
     <div class="moments-wrap rv">
       <div class="moments" id="moments" tabindex="0" aria-label="عکس‌ها، با اسکرول افقی">
+      <figure class="moment" data-only="padel" hidden>
+        <img data-src="media/padel-strip-overhead.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="مهرانه زیر سقف زمین پدل، لحظه‌ی ضربه‌ی بالای سر">
+        <figcaption>ضربه‌ی بالای سر</figcaption>
+      </figure>
+      <figure class="moment" data-only="padel" hidden>
+        <img data-src="media/padel-strip-eyes.jpg" width="585" height="780" loading="lazy" decoding="async" alt="مهرانه توی زمین پدل، راکت بالا و چشم روی توپ">
+        <figcaption>چشم روی توپ</figcaption>
+      </figure>
+      <figure class="moment" data-only="padel" hidden>
+        <img data-src="media/padel-strip-ready.jpg" width="480" height="600" loading="lazy" decoding="async" alt="مهرانه در حالت آماده، اون طرف تور">
+        <figcaption>آماده‌ی توپ بعدی</figcaption>
+      </figure>
       <figure class="moment">
         <img src="media/runnerup-tour.jpg" width="939" height="960" loading="lazy" decoding="async" alt="نایب‌قهرمانی تور جهانی جوانان ITF، در کنار جام">
         <figcaption>نایب‌قهرمانی تور جهانی</figcaption>
@@ -1731,7 +1805,7 @@ var SPORTS = {
       footTag:"مربی تنیس در مشهد — ۱۳ سال سابقه، بازی حرفه‌ای و عضویت در تیم ملی. کلاس خصوصی، نیمه‌خصوصی، گروهی، هیتینگ پارتنر و استعدادیابی رایگان."
     },
     media:{
-      hero:{video:"media/court.mp4", poster:"media/court-poster.jpg", alt:"تمرین روی زمین خاک"},
+      hero:{video:"media/court.mp4", poster:"media/court-poster.jpg", w:464, h:848, alt:"تمرین روی زمین خاک"},   /* poster: also in the <head> preload */
       s0:{img:"media/serve.jpg",  w:719, h:959, alt:"سرویس روی زمین خاک"},
       s1:{img:"media/trophy.jpg", w:720, h:720, alt:"اهدای جام مسابقات ITF World Tennis Tour Junior"},
       s2:{img:"media/coach.jpg",  w:720, h:720, alt:"روی زمین تمرین، کنار مربی"}
@@ -1756,12 +1830,20 @@ var SPORTS = {
       recordLead:"اینا دستاوردهای من تو تنیسه. من از تنیس اومدم سمت پدل و همون تجربه رو اونجا به کار می‌گیرم، پس وقتی در مورد یه ضربه یا یه تصمیم تو زمین صحبت می‌کنم، بر اساس تجربه‌ایه که خودم کردم.",
       footTag:"مربی پدل در مشهد — ۱۳ سال سابقه‌ی تنیس، عضویت در تیم ملی و ۲ سال بازی پدل. کلاس خصوصی، نیمه‌خصوصی و هیتینگ پارتنر (پدل حداکثر دو نفره‌ست)."
     },
-    /* no padel photos yet — her tennis ones stand in (the page leads with her tennis background) */
+    /* her own padel clips: the hero is a loop cut from all three, s0-s2 are stills from them */
     media:{
-      hero:{video:"media/court.mp4", poster:"media/court-poster.jpg", alt:"تمرین روی زمین خاک"},
-      s0:{img:"media/serve.jpg",  w:719, h:959, alt:"سرویس روی زمین خاک"},
-      s1:{img:"media/trophy.jpg", w:720, h:720, alt:"اهدای جام مسابقات ITF World Tennis Tour Junior"},
-      s2:{img:"media/coach.jpg",  w:720, h:720, alt:"روی زمین تمرین، کنار مربی"}
+      hero:{video:"media/padel-hero.mp4", poster:"media/padel-hero-poster.jpg", w:680, h:850, alt:"مهرانه توی زمین پدل، چند ضربه پشت سر هم"},   /* poster: also in the <head> preload */
+      s0:{img:"media/padel-about-forehand.jpg", w:741, h:988, alt:"مهرانه بعد از یه فورهند، توی زمین پدل"},
+      s1:{img:"media/padel-about-overhead.jpg", w:540, h:540, alt:"ضربه‌ی بالای سر توی زمین پدل، توپ روی راکت"},
+      s2:{img:"media/padel-about-low.jpg",      w:480, h:480, alt:"یه توپ پایین با زانوهای خم، جلوی دیوار شیشه‌ای"}
+    },
+    /* the frame-by-frame forehand in #record: src = frame numbers in the 30 fps clip,
+       phases = [first frame, name, frame its chip jumps to] */
+    lab:{
+      dir:"media/padel-lab/fh-",
+      src:[42, 54, 62, 63, 65, 67, 69, 71, 72, 73, 74, 75, 76, 78, 81, 84, 88],
+      contact:10,
+      phases:[[0, "آماده", 0], [3, "چرخش", 4], [6, "راکت عقب", 8], [9, "ضربه", 10], [12, "ادامه‌ی ضربه", 15]]
     }
   }
 };
@@ -1772,6 +1854,11 @@ function setMeta(sel, val){
 }
 function fillSlot(el, def){
   if(!el) return;
+  if(el._io){ el._io.disconnect(); el._io = null; }
+  el._start = el._stop = null;
+  var old = el.querySelector("video");
+  if(old){ old.pause(); old.removeAttribute("src"); old.load(); }   /* stop the other sport's download */
+  el.classList.remove("live");
   if(!def){                                   /* no media for this sport yet */
     var ph = (el.getAttribute("data-ph") || "عکس|").split("|");
     el.classList.remove("filled");
@@ -1779,13 +1866,55 @@ function fillSlot(el, def){
     return;
   }
   el.classList.add("filled");
-  if(def.video){
-    el.innerHTML = '<video src="' + def.video + '" poster="' + def.poster + '"'
-      + ' autoplay muted loop playsinline preload="metadata" aria-label="' + def.alt + '"></video>';
-  } else {
-    el.innerHTML = '<img src="' + def.img + '" width="' + def.w + '" height="' + def.h + '"'
-      + ' loading="lazy" decoding="async" alt="' + def.alt + '">';
+  var hero = el.getAttribute("data-slot") === "hero";
+  el.innerHTML = '<img src="' + (def.poster || def.img) + '" width="' + def.w + '" height="' + def.h + '"'
+    + (hero ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async" alt="' + def.alt + '">';
+  if(def.video) loopVideo(el, def);
+}
+
+/* A looping video sits on its own poster. The poster is what loads first; the video downloads only
+   once the gate is gone and the card is on screen, and waits for a tap under reduced motion or
+   Data Saver. A loop longer than 5 s needs a pause control, so every one gets one. */
+var SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
+var IC_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
+    IC_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>';
+function loopVideo(el, def){
+  var v = document.createElement("video");
+  v.muted = v.defaultMuted = v.loop = v.playsInline = true;
+  ["muted", "loop", "playsinline"].forEach(function(a){ v.setAttribute(a, ""); });   /* iOS reads the attributes */
+  v.preload = "none"; v.tabIndex = -1; v.setAttribute("aria-hidden", "true");
+  var b = document.createElement("button"); b.type = "button"; b.className = "vid-toggle";
+  el.appendChild(v); el.appendChild(b);
+  var held = REDUCED || SAVE_DATA, seen = false;
+  function paint(){
+    var on = !v.paused;
+    b.innerHTML = on ? IC_PAUSE : IC_PLAY;
+    b.setAttribute("aria-label", on ? "مکث ویدیو" : "پخش ویدیو");
   }
+  function go(){
+    if(held || !seen || document.documentElement.classList.contains("gated")) return;
+    if(!v.getAttribute("src")) v.src = def.video;
+    var p = v.play();
+    /* only a real refusal (iOS Low Power Mode) parks it on the poster; an AbortError from a fast scroll must not */
+    if(p && p.catch) p.catch(function(e){ if(e && e.name === "NotAllowedError"){ held = true; paint(); } });
+  }
+  v.addEventListener("playing", function(){ el.classList.add("live"); });
+  v.addEventListener("play", paint);
+  v.addEventListener("pause", paint);
+  b.addEventListener("click", function(){
+    if(v.paused){ held = false; seen = true; go(); }
+    else { held = true; v.pause(); }
+  });
+  if("IntersectionObserver" in window){
+    el._io = new IntersectionObserver(function(es){
+      seen = es[es.length - 1].isIntersecting;
+      if(seen) go(); else if(!v.paused) v.pause();
+    }, {threshold:.2});
+    el._io.observe(el);
+  } else seen = true;                         /* iOS 12.0: no observer, so just play once the gate is gone */
+  el._start = go;                             /* the gate covers the hero, which an observer can't see */
+  el._stop = function(){ if(!v.paused) v.pause(); };
+  paint();
 }
 
 var CURRENT = null;
@@ -1810,6 +1939,14 @@ function applySport(key){
   document.querySelectorAll("[data-only]").forEach(function(el){
     el.hidden = el.getAttribute("data-only") !== key;
   });
+  /* one sport's images wait for it: Chrome still downloads a lazy image that is display:none */
+  document.querySelectorAll('[data-only="' + key + '"] img[data-src]').forEach(function(im){
+    im.src = im.getAttribute("data-src");
+    im.removeAttribute("data-src");
+  });
+  /* the strip keeps its snap point across a switch, which would hide the cards that just appeared at its start */
+  var mo = document.getElementById("moments");
+  if(mo) mo.scrollLeft = 0;
 
   var tt = document.querySelector(".ticker-track");
   if(tt){
@@ -1838,22 +1975,34 @@ function applySport(key){
 
 /* ── the gate ── */
 var gate = document.getElementById("gate");
+function heroSlot(){ return document.querySelector('[data-slot="hero"]') || {}; }
 function showGate(){
   document.documentElement.classList.add("gated");
   if(gate) gate.removeAttribute("aria-hidden");
+  if(heroSlot()._stop) heroSlot()._stop();
 }
 function hideGate(){
   document.documentElement.classList.remove("gated");
   if(gate) gate.setAttribute("aria-hidden", "true");
+  if(heroSlot()._start) heroSlot()._start();
 }
 function route(){
   var key = (location.hash || "").replace("#", "");
   if(SPORTS[key]){ applySport(key); hideGate(); }
-  else { showGate(); }
+  else if(!key){ showGate(); }
+  /* #about, #classes, ...: a section link keeps the current sport and leaves the gate shut */
 }
 if(gate){
   gate.querySelectorAll("[data-go]").forEach(function(b){
     b.addEventListener("click", function(){ location.hash = b.getAttribute("data-go"); });
+    /* a hover or touch on a half starts that sport's hero poster before the click lands */
+    function warm(){
+      var S = SPORTS[b.getAttribute("data-go")];
+      if(S && !b._warm){ b._warm = true; new Image().src = S.media.hero.poster; }
+    }
+    b.addEventListener("pointerenter", warm);
+    b.addEventListener("focus", warm);
+    b.addEventListener("touchstart", warm, {passive:true});
   });
 }
 window.addEventListener("hashchange", route);
@@ -1861,6 +2010,58 @@ window.addEventListener("hashchange", route);
 /* a bare URL always shows the gate; a direct #tennis / #padel link goes straight in */
 applySport(SPORTS[(location.hash || "").replace("#", "")] ? (location.hash || "").replace("#", "") : "tennis");
 route();
+
+/* ─────────── padel: one forehand, frame by frame ───────────
+   Driven only by the visitor (slider, phase chips, "play slowly"); nothing moves by itself.
+   The frames load once the block is near the viewport, so the tennis page (block hidden) never fetches them. */
+(function(){
+  var L = SPORTS.padel.lab, box = document.getElementById("lab");
+  if(!L || !box) return;
+  var img = box.querySelector(".lab-stage img"), pill = box.querySelector(".lab-phase"),
+      ring = box.querySelector(".lab-ring"), clock = box.querySelector(".lab-clock"),
+      range = box.querySelector(".lab-range"), chips = box.querySelector(".lab-phases"),
+      play = box.querySelector(".lab-play"), N = L.src.length, timer = null, pics = [];
+  function url(i){ return L.dir + (i < 10 ? "0" : "") + i + ".jpg"; }
+  function phaseOf(i){ var p = L.phases[0]; L.phases.forEach(function(q){ if(q[0] <= i) p = q; }); return p; }
+  function stop(){ if(timer){ clearTimeout(timer); timer = null; } play.textContent = "پخش آهسته"; }
+  function draw(i, keepImg){
+    var p = phaseOf(i), s = (L.src[i] - L.src[L.contact]) / 30;
+    if(!keepImg) img.src = url(i);
+    pill.textContent = p[1];
+    clock.textContent = i === L.contact ? "لحظه‌ی ضربه"
+      : toFa(Math.abs(s).toFixed(2)).replace(".", "٫") + (s < 0 ? " ثانیه تا ضربه" : " ثانیه بعد از ضربه");
+    ring.classList.toggle("on", i === L.contact);
+    range.value = i;
+    range.setAttribute("aria-valuetext", "فریم " + toFa(i + 1) + " از " + toFa(N) + "، " + p[1] + "، " + clock.textContent);
+    Array.prototype.forEach.call(chips.children, function(b, k){ b.classList.toggle("on", L.phases[k] === p); });
+  }
+  /* about four times slower than real life, with a beat on the contact */
+  function step(i){
+    draw(i);
+    if(i >= N - 1){ stop(); return; }
+    var gap = (L.src[i + 1] - L.src[i]) * 1000 / 30 * 4;
+    timer = setTimeout(function(){ step(i + 1); }, i === L.contact ? 900 : Math.max(110, Math.min(420, gap)));
+  }
+  L.phases.forEach(function(q){
+    var b = document.createElement("button"); b.type = "button"; b.textContent = q[1];
+    b.addEventListener("click", function(){ stop(); draw(q[2]); });
+    chips.appendChild(b);
+  });
+  range.max = N - 1;
+  range.addEventListener("input", function(){ stop(); draw(+range.value); });
+  play.addEventListener("click", function(){
+    if(timer){ stop(); return; }
+    play.textContent = "توقف";
+    step(0);
+  });
+  function load(){ for(var i = 0; i < N; i++){ pics[i] = new Image(); pics[i].src = url(i); } }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(es, io){
+      if(es[0].isIntersecting){ io.disconnect(); load(); }
+    }, {rootMargin:"600px 0px"}).observe(box);
+  } else load();
+  draw(L.contact, true);                      /* the markup already holds the contact frame */
+})();
 
 /* ─────────── pointer play: magnetic buttons, tilting cards, hero parallax ─────────── */
 if(CAN_HOVER && !REDUCED){

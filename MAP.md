@@ -32,7 +32,7 @@ Amir Ardekani's coaching site (`amirardekani.com`, repo `Website`). Start here, 
 | Photo strip («لحظه‌هایی از مسیرم») | `#photos`, one `<figure class="moment">` per photo (image, then caption) |
 | About text | `#about` (shared paragraphs) and `aboutP1` in `SPORTS` (per sport) |
 | **Classes and prices** (toman) | `#classes`. Group class is tennis only: those cards have `data-only="tennis"` |
-| Courts and clubs | `#venues` (copied in `form.html` too: change both) |
+| Courts and clubs | `#venues` (copied in `form.html` too, plus the FAQ answer and footer count: change all). Tennis: 4 venues; padel: پدل هاب (سجاد), بوتیک پدل (هفت تیر), نارون پدل (مجموعه‌ی سوارکاری ارشاد), each tagged `data-only` |
 | How to start / steps | `#how` |
 | FAQ | `#faq` |
 | Contact and footer | `#contact` and the footer |

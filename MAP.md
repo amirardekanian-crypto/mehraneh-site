@@ -54,7 +54,7 @@ entry in `SPORTS`.
 | `serve.jpg` | A serve on clay | About shot 1, tennis |
 | `trophy.jpg` | Runner-up trophy handover, ITF World Tennis Tour Juniors | About shot 2, tennis |
 | `coach.jpg` | On court next to a coach | About shot 3, tennis |
-| `padel-hero.mp4`, `padel-hero-poster.jpg` | A 5.9 s loop of all three padel clips, cut on contact: each hit holds for 3 frames with a small push-in and a lime ring. Starts and loops on a backhand-volley contact; the poster is that frame | Hero, padel |
+| `padel-hero-2.mp4`, `padel-hero-poster.jpg` | A 9.6 s loop, cut on contact: each hit holds for 3 frames with a small push-in and a lime ring. Six hits from `IMG_4630/4631/4633` and the drill clip `IMG_8780`, then a coaching moment from `IMG_8793` (feeding from the ball basket, on the green court; the jeweller's banner lettering behind her was painted out and the red shop sign above is cropped off). Starts and loops on a backhand-volley contact; the poster is that frame | Hero, padel |
 | `padel-about-forehand.jpg` | Backhand-volley follow-through, smiling (file name says forehand; it isn't) | About shot 1, padel |
 | `padel-about-overhead.jpg` | Overhead, ball on the racquet | About shot 2, padel |
 | `padel-about-low.jpg` | A low ball, knees bent | About shot 3, padel |
@@ -66,8 +66,8 @@ entry in `SPORTS`.
 | `practice-clay.jpg` | Training on clay | Photo strip |
 | `child-medal.jpg`, `child-medal-family.jpg` | As a child, with a medal | Photo strip |
 
-Every `padel-*` file comes from three iPhone clips Amir sent on 21 Oct 2026 (`IMG_4630`, `IMG_4631`, `IMG_4633`,
-1072 px wide, 30 fps): levelled (the phone was tilted about 2.5°), steadied, lightly graded, and cleaned. Things painted
+Every `padel-*` file comes from iPhone clips Amir sent on 21 Oct 2026 (`IMG_4630`, `IMG_4631`, `IMG_4633`, later `IMG_8780`
+and `IMG_8793`; 1072 px wide, 30 fps): levelled (the phone was tilted about 2.5°), steadied, lightly graded, and cleaned. Things painted
 out of the background, so check any new crop from these clips for them:
 - `IMG_4631` (the close backhand volley): **a stranger's sign on the far wall with a name, phone number and QR code** (left of
   her), plus two shop logos behind the glass (right of her).
